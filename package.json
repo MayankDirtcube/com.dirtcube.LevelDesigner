@@ -1,0 +1,7 @@
+{
+    "name": "xyz.dirtcube.LevelDesigner",
+    "displayName": "Level Designer",
+    "version": "1.0",
+    "unity": "2019.2",
+    "description": "Editor Tool to desing level Editor side and create at runtime."
+}
