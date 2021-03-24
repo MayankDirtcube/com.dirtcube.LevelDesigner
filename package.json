@@ -1,7 +1,11 @@
-{
-    "name": "xyz.dirtcube.LevelDesigner",
-    "displayName": "Level Designer",
-    "version": "1.0",
-    "unity": "2019.2",
-    "description": "Editor Tool to desing level Editor side and create at runtime."
-}
+"name": "xyz.dirtcube.LevelDesigner",
+  "displayName": "Level Designer",
+  "version": "1.0.0",
+  "unity": "2020.1",
+  "description": "Collaborate with your teammates with the official version control system for Unity. Collaborate is a simple way for teams to save, share, and sync your Unity project.",
+  "category": "Editor",
+  "dependencies": {},
+  "repository": {
+    "url": "https://github.com/MayankDirtcube/xyz.Dirtcube.LevelDesigner.git",
+    "type": "git",
+  }
