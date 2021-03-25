@@ -3,32 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
-using Assets;
 
-public class AssetHandler
+namespace LevelDesigner
 {
-    [OnOpenAsset()]
-    public static bool OpenEditor(int instanceId,int line)
+    public class AssetHandler
     {
-        SOLevelAssets assets = EditorUtility.InstanceIDToObject(instanceId) as SOLevelAssets;
-        if (assets!=null)
+        [OnOpenAsset()]
+        public static bool OpenEditor(int instanceId, int line)
         {
-            LevelDesingEditorWindow.showWindow(assets);
-            return true;
+            SOLevelAssets assets = EditorUtility.InstanceIDToObject(instanceId) as SOLevelAssets;
+            if (assets != null)
+            {
+                LevelDesingEditorWindow.showWindow(assets);
+                return true;
+            }
+            return false;
         }
-        return false;
+    }
+
+    [CustomEditor(typeof(SOLevelAssets))]
+    public class LevelDataCustomEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            if (GUILayout.Button("Level Designer"))
+            {
+                //LevelDesingEditorWindow.showWindow((SOLevelAssets)target);
+                SOLevelAssets s = (SOLevelAssets)target;
+                float w = s.LevelGrid.x * s.GridOffset * 3;
+                float h = s.LevelGrid.y * s.GridOffset * 3;
+                UPASession.CreateImage((int)w,(int)h);
+               
+            }
+        }
     }
 }
 
-[CustomEditor(typeof(SOLevelAssets))] 
-public class LevelDataCustomEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        if (GUILayout.Button("Level Designer"))
-        {
-            LevelDesingEditorWindow.showWindow((SOLevelAssets)target);
-        }
-    }
-}

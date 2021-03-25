@@ -1,17 +1,21 @@
 using UnityEditor;
-using Assets;
+using LevelDesigner;
 
-public class LevelDesingEditorWindow : ExtendedEditorWindow
+namespace LevelDesigner
 {
-    public static void showWindow(SOLevelAssets levelassets)
+    public class LevelDesingEditorWindow : ExtendedEditorWindow
     {
-        LevelDesingEditorWindow window = GetWindow<LevelDesingEditorWindow>("Level Designer");
-        window.serializedObject = new SerializedObject(levelassets);
-    }
+        public static void showWindow(SOLevelAssets levelassets)
+        {
+            LevelDesingEditorWindow window = GetWindow<LevelDesingEditorWindow>("Level Designer");
+            window.serializedObject = new SerializedObject(levelassets);
+        }
 
-    private void OnGUI()
-    {
-        //currentProperty = serializedObject.FindProperty("assets");
-        DrawProperties(serializedObject.FindProperty("assets"),true);
+        private void OnGUI()
+        {
+            //currentProperty = serializedObject.FindProperty("assets");
+            DrawProperties(serializedObject.FindProperty("assets"), true);
+        }
     }
 }
+

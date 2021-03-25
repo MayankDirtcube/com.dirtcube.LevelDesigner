@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[System.Serializable]
-public class PixelToColor
+
+namespace LevelDesigner
 {
-    public Color color;
-    public GameObject Prefeb;
+    [System.Serializable]
+    public class PixelToPrefeb
+    {
+        public Color color;
+        public GameObject Prefeb;
+    }
 }
+
