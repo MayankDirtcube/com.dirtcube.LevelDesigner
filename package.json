@@ -4,7 +4,6 @@
   "unity": "2020.1",
   "description": "Collaborate with your teammates with the official version control system for Unity. Collaborate is a simple way for teams to save, share, and sync your Unity project.",
   "category": "Editor",
-  "dependencies": {},
   "repository": {
     "url": "https://github.com/MayankDirtcube/xyz.Dirtcube.LevelDesigner.git",
     "type": "git",
