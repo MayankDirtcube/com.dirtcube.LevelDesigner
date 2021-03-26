@@ -5,10 +5,11 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using LevelDesigner;
 
 public class UPASession {
 
-	public static UPAImage CreateImage (int w, int h) {
+	public static UPAImage CreateImage (int w, int h,SOLevelAssets s) {
 		string path = EditorUtility.SaveFilePanel ("Create UPAImage",
 		                                           "Assets/", "Pixel Image.asset", "asset");
 		if (path == "") {
@@ -22,7 +23,7 @@ public class UPASession {
 		
 		AssetDatabase.SaveAssets();
 		
-		img.Init(w, h);
+		img.Init(w, h,s);
 		EditorUtility.SetDirty(img);
 		UPAEditorWindow.CurrentImg = img;
 		
@@ -56,7 +57,7 @@ public class UPASession {
 				// Load Texture from file
 				Texture2D tex = LoadImageFromFile(path);
 				// Create a new Image with textures dimensions
-				UPAImage img = CreateImage(tex.width, tex.height);
+				UPAImage img = CreateImage(tex.width, tex.height,new SOLevelAssets());
 				// Set pixel colors
 				img.layers[0].tex = tex;
 				img.layers[0].tex.filterMode = FilterMode.Point;

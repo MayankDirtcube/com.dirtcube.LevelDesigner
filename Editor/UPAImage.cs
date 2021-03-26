@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
+using LevelDesigner;
 
 [System.Serializable]
 public class UPAImage : ScriptableObject {
@@ -22,6 +23,9 @@ public class UPAImage : ScriptableObject {
 
 	public int width;
 	public int height;
+
+	//ScriplatebleObject
+	public SOLevelAssets levelassets;
 
 	public List<UPALayer> layers;
 	public int layerCount
@@ -71,9 +75,10 @@ public class UPAImage : ScriptableObject {
 	}
 
 	// This is not called in constructor to have more control
-	public void Init (int w, int h) {
+	public void Init (int w, int h,SOLevelAssets s) {
 		width = w;
 		height = h;
+		levelassets = s;
 
 		layers = new List<UPALayer>();
 		UPALayer newLayer = new UPALayer (this);
@@ -96,6 +101,16 @@ public class UPAImage : ScriptableObject {
 		Undo.RecordObject (layers[layer].tex, "ColorPixel");
 
 		layers[layer].SetPixel ((int)pixelCoordinate.x, (int)pixelCoordinate.y, color);
+
+		//Store Data in SOLevelAssets
+		foreach(PixelToPrefeb pixel in levelassets.assets)
+        {
+            if (color.Equals(pixel.color))
+            {
+				pixel.postions.Add(pixelCoordinate);
+            }
+        }
+
 		
 		EditorUtility.SetDirty (this);
 		dirty = true;

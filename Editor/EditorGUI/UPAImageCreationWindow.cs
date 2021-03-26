@@ -41,7 +41,7 @@ public class UPAImageCreationWindow : EditorWindow {
 		
 		if ( GUILayout.Button ("Create", GUILayout.Height (30))) {
 			this.Close();
-			UPASession.CreateImage (xRes, yRes);
+			//UPASession.CreateImage (xRes, yRes);
 		}
 	}
 }

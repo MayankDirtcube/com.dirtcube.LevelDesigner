@@ -29,11 +29,11 @@ namespace LevelDesigner
             base.OnInspectorGUI();
             if (GUILayout.Button("Level Designer"))
             {
-                //LevelDesingEditorWindow.showWindow((SOLevelAssets)target);
                 SOLevelAssets s = (SOLevelAssets)target;
+                LevelDesingEditorWindow.showWindow(s);
                 float w = s.LevelGrid.x * s.GridOffset * 3;
                 float h = s.LevelGrid.y * s.GridOffset * 3;
-                UPASession.CreateImage((int)w,(int)h);
+                UPASession.CreateImage((int)w,(int)h,s);
                
             }
         }
