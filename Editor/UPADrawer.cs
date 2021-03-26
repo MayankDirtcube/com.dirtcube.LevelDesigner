@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using AssemblyCSharpEditor;
 using System.IO;
+using LevelDesigner;
 
 public class UPADrawer : MonoBehaviour {
 	
@@ -101,6 +102,11 @@ public class UPADrawer : MonoBehaviour {
 	}
 
 	// Draw the settings toolbar
+
+	public static void DrawScriptableObject(Rect window,SOLevelAssets scriptableObject)
+    {
+		EditorGUI.DrawRect(new Rect(100,0,100,window.height),toolbarColor);
+    }
 	public static void DrawToolbar (Rect window, Vector2 mousePos) {
 
 		// Draw toolbar bg

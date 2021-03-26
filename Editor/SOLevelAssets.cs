@@ -7,10 +7,15 @@ namespace LevelDesigner
     [CreateAssetMenu(fileName = "AssetList", menuName = "LevelAssets")]
     public class SOLevelAssets : ScriptableObject
     {
-        public PixelToPrefeb[] assets;
-        public PixelToPrefeb[] FloorAssets;
+        public PixelToPrefeb[] levelLayers;
         public Vector2 LevelGrid;
         public int GridOffset;
+
+
+        public PixelToPrefeb[] getLayers()
+        {
+            return levelLayers;
+        }
     }
 }
 

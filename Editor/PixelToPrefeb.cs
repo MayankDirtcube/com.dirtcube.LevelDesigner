@@ -9,8 +9,17 @@ namespace LevelDesigner
     {
         public Color color;
         public GameObject Prefeb;
-        //[HideInInspector]
+        [HideInInspector]
         public List<Vector2> postions;
+
+        public void add(Vector2 pos)
+        {
+            postions.Add(pos);
+        }
+        public void clear()
+        {
+            postions.Clear();
+        }
     }
 }
 

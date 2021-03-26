@@ -1,3 +1,16 @@
 {
-	"name": "dirtcube.leveldesigner"
+    "name": "dirtcube.leveldesigner",
+    "rootNamespace": "",
+    "references": [
+        "GUID:37166433f5b8c4797a2da433e2584a36"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
