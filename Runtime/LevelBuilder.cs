@@ -6,13 +6,13 @@ using LevelDesigner;
 
 public class LevelBuilder : MonoBehaviour
 {
+
     public SOLevelAssets[] ListOfLevels;
+    public int level;
+
     void Start()
     {
-        foreach(SOLevelAssets level in ListOfLevels)
-        {
-            LevelGenrater(level);
-        }
+            LevelGenrater(ListOfLevels[level]);
     }
 
     private void LevelGenrater(SOLevelAssets level)

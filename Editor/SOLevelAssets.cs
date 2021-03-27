@@ -19,6 +19,8 @@ namespace LevelDesigner
         public Vector2 LevelGrid;
         public int GridOffset;
 
+        public UPAImage LevelMap;
+
         public PixelToPrefeb[] GetLevelAssets()
         {
             return levelAssets;

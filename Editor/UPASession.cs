@@ -10,8 +10,8 @@ using LevelDesigner;
 public class UPASession {
 
 	public static UPAImage CreateImage (int w, int h,SOLevelAssets s) {
-		string path = EditorUtility.SaveFilePanel ("Create UPAImage",
-		                                           "Assets/", "Pixel Image.asset", "asset");
+		string path = EditorUtility.SaveFilePanel ("Create Level Map",
+												   "Assets/LevelBuilder/", s.name + "_Map.asset", "asset");
 		if (path == "") {
 			return null;
 		}
@@ -20,6 +20,7 @@ public class UPASession {
 		
 		UPAImage img = ScriptableObject.CreateInstance<UPAImage>();
 		AssetDatabase.CreateAsset (img, path);
+		s.LevelMap = img;
 		
 		AssetDatabase.SaveAssets();
 		
