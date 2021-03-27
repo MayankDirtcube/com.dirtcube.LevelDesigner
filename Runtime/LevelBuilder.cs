@@ -19,14 +19,23 @@ public class LevelBuilder : MonoBehaviour
     {
         GameObject top = new GameObject(level.name);
         top.transform.parent = transform;
-     
-                foreach(PixelToPrefeb n in level.getLayers())
-                {
-                        foreach(Vector2 pos in n.postions)
-                        {
-                            Vector3 postion = new Vector3(pos.x,0,pos.y);
-                             GameObject.Instantiate(n.Prefeb, postion, Quaternion.identity, top.transform);
-                        }
-                }
+        AssetSpwaner(level.levelAssets,top.transform);
+        AssetSpwaner(level.floorTills,top.transform);
+
+    }
+
+    private void AssetSpwaner(PixelToPrefeb[] assetlist, Transform Currentparent)
+    {
+        GameObject t = new GameObject(assetlist.ToString());
+        t.transform.parent = Currentparent;
+
+        foreach (PixelToPrefeb n in assetlist)
+        {
+            foreach (Vector2 pos in n.postions)
+            {
+                Vector3 postion = new Vector3(pos.x, 0, pos.y);
+                GameObject.Instantiate(n.Prefeb, postion, Quaternion.identity, t.transform);
+            }
+        }
     }
 }

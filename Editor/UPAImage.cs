@@ -85,10 +85,15 @@ public class UPAImage : ScriptableObject {
 		UPALayer newLayer2 = new UPALayer(this);
 		layers.Add(newLayer2);
 
-	foreach(PixelToPrefeb pixel in s.levelLayers)
+	foreach(PixelToPrefeb pixel in s.levelAssets)
         {
 			pixel.clear();
         }
+		foreach (PixelToPrefeb till in s.floorTills)
+		{
+			till.clear();
+		}
+
 		EditorUtility.SetDirty (this);
 		dirty = true;
 	}
@@ -104,14 +109,27 @@ public class UPAImage : ScriptableObject {
 
 		layers[layer].SetPixel ((int)pixelCoordinate.x, (int)pixelCoordinate.y, color);
 
-		//Store Data in SOLevelAssets
-		foreach (PixelToPrefeb pixel in levelassets.levelLayers)
+        //Store Data in SOLevelAssets
+        if (layer > 0)
         {
-            if (color.Equals(pixel.color))
+			foreach(PixelToPrefeb pixelcolor in levelassets.levelAssets)
             {
-				pixel.postions.Add(pixelCoordinate);
+                if (pixelcolor.color.Equals(UPAEditorWindow.CurrentImg.selectedColor))
+                {
+					pixelcolor.add(pixelCoordinate);
+                }
             }
         }
+        else
+        {
+			foreach (PixelToPrefeb pixelcolor in levelassets.floorTills)
+			{
+				if (pixelcolor.color.Equals(UPAEditorWindow.CurrentImg.selectedColor))
+				{
+					pixelcolor.add(pixelCoordinate);
+				}
+			}
+		}
 
 		
 		EditorUtility.SetDirty (this);

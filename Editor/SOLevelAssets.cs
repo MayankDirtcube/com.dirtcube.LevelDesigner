@@ -4,17 +4,29 @@ using UnityEngine;
 
 namespace LevelDesigner
 {
+
     [CreateAssetMenu(fileName = "AssetList", menuName = "LevelAssets")]
     public class SOLevelAssets : ScriptableObject
     {
-        public PixelToPrefeb[] levelLayers;
+        //[SerializeField]
+        //public class Layers
+        //{
+        //    public PixelToPrefeb[] assets;
+        //}
+
+        public PixelToPrefeb[] levelAssets;
+        public PixelToPrefeb[] floorTills;
         public Vector2 LevelGrid;
         public int GridOffset;
 
-
-        public PixelToPrefeb[] getLayers()
+        public PixelToPrefeb[] GetLevelAssets()
         {
-            return levelLayers;
+            return levelAssets;
+        }
+
+        public PixelToPrefeb[] GetFloorAssets()
+        {
+            return levelAssets;
         }
     }
 }

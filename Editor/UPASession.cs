@@ -32,7 +32,7 @@ public class UPASession {
 		if (UPAEditorWindow.window != null)
 			UPAEditorWindow.window.Repaint();
 		else
-			UPAEditorWindow.Init();
+			UPAEditorWindow.Init(s);
 
 		img.gridSpacing = 10 - Mathf.Abs (img.width - img.height)/100f;
 		return img;

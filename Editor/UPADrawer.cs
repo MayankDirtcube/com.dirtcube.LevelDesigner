@@ -103,36 +103,59 @@ public class UPADrawer : MonoBehaviour {
 
 	// Draw the settings toolbar
 
-	public static void DrawScriptableObject(Rect window,SOLevelAssets scriptableObject)
+	public static void DrawScriptableObject(Rect window)
     {
-		EditorGUI.DrawRect(new Rect(100,0,100,window.height),toolbarColor);
-    }
+		EditorGUI.DrawRect(new Rect(0,0,100,window.height),toolbarColor);
+		PixelToPrefeb[] colorPalatte;
+		if (CurrentImg.selectedLayer > 0)
+		{
+			colorPalatte = UPAEditorWindow.level.levelAssets;
+        }
+        else
+        {
+			colorPalatte = UPAEditorWindow.level.floorTills;
+        }
+
+        for (int i = 0; i< colorPalatte.Length; i++)
+		{
+			Rect position = new Rect(0, i * 50 + 10, 50, 50);
+			EditorGUI.DrawRect(position, colorPalatte[i].color);
+			if (GUI.Button(position, "", new GUIStyle()))
+			{
+				UPAEditorWindow.CurrentImg.selectedColor = colorPalatte[i].color;
+				Debug.Log(colorPalatte[i].color.ToString());
+			}
+		}
+	}
+
 	public static void DrawToolbar (Rect window, Vector2 mousePos) {
 
 		// Draw toolbar bg
 		EditorGUI.DrawRect ( new Rect (0,0, window.width, 40), toolbarColor );
-		
-		//if ( GUI.Button (new Rect (5, 4, 50, 30), "New") ) {
-		//	UPAImageCreationWindow.Init ();
-		//}
-		//if ( GUI.Button (new Rect (60, 4, 50, 30), "Open") ) {
-		//	CurrentImg = UPASession.OpenImage ();
-		//	if (CurrentImg == null)
-		//		return;
-		//}
-		//if ( GUI.Button (new Rect (115, 4, 50, 30), "Export") ) {
-		//	UPAExportWindow.Init(CurrentImg);
-		//}
 
-		//if (GUI.Button (new Rect (179, 6, 25, 25), "+")) {
-		//	CurrentImg.gridSpacing *= 1.2f;
-		//}
-		//if (GUI.Button (new Rect (209, 6, 25, 25), "-")) {
-		//	CurrentImg.gridSpacing *= 0.8f;
-		//	CurrentImg.gridSpacing -= 2;
-		//}
-		
-		CurrentImg.selectedColor = EditorGUI.ColorField (new Rect (250, 7, 70, 25), CurrentImg.selectedColor);
+        //if ( GUI.Button (new Rect (5, 4, 50, 30), "New") ) {
+        //	UPAImageCreationWindow.Init ();
+        //}
+        //if ( GUI.Button (new Rect (60, 4, 50, 30), "Open") ) {
+        //	CurrentImg = UPASession.OpenImage ();
+        //	if (CurrentImg == null)
+        //		return;
+        //}
+        //if ( GUI.Button (new Rect (115, 4, 50, 30), "Export") ) {
+        //	UPAExportWindow.Init(CurrentImg);
+        //}
+
+        if (GUI.Button(new Rect(179, 6, 25, 25), "+"))
+        {
+            CurrentImg.gridSpacing *= 1.2f;
+        }
+        if (GUI.Button(new Rect(209, 6, 25, 25), "-"))
+        {
+            CurrentImg.gridSpacing *= 0.8f;
+            CurrentImg.gridSpacing -= 2;
+        }
+
+        CurrentImg.selectedColor = EditorGUI.ColorField (new Rect (250, 7, 70, 25), CurrentImg.selectedColor);
 		EditorGUI.DrawRect ( new Rect (303, 7, 20, 25), toolbarColor );
 		//bgColor = EditorGUI.ColorField (new Rect (400, 4, 70, 25), bgColor);
 		

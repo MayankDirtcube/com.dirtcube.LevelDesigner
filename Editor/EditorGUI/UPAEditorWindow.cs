@@ -6,12 +6,15 @@
 
 using UnityEngine;
 using UnityEditor;
+using LevelDesigner;
 
 public class UPAEditorWindow : EditorWindow {
 	
 	public static UPAEditorWindow window;	// The static instance of the window
 	
-	public static UPAImage CurrentImg;		// The img currently being edited
+	public static UPAImage CurrentImg;      // The img currently being edited
+
+	public static SOLevelAssets level;
 	
 	
 	// HELPFUL GETTERS AND SETTERS
@@ -52,7 +55,7 @@ public class UPAEditorWindow : EditorWindow {
 	// INITIALIZATION
 	
 	[MenuItem ("Window/Pixel Art Editor %#p")]
-	public static void Init () {
+	public static void Init (SOLevelAssets s) {
 		// Get existing open window or if none, make new one
 		window = (UPAEditorWindow)EditorWindow.GetWindow (typeof (UPAEditorWindow));
 		#if UNITY_4_3
@@ -61,8 +64,8 @@ public class UPAEditorWindow : EditorWindow {
 		window.title = "Pixel Art Editor";
 		#else
 		window.titleContent = new GUIContent ("Pixel Art Editor");
-		#endif
-		
+#endif
+		level = s;
 		string path = EditorPrefs.GetString ("currentImgPath", "");
 		
 		if (path.Length != 0)
@@ -75,7 +78,7 @@ public class UPAEditorWindow : EditorWindow {
 	// TODO: Add comments
 	void OnGUI () {
 		if (window == null)
-			Init ();
+			Init (level);
 		
 		if (CurrentImg == null) { 
 			
@@ -193,6 +196,8 @@ public class UPAEditorWindow : EditorWindow {
 		UPADrawer.DrawImage ( CurrentImg );
 		
 		UPADrawer.DrawToolbar (window.position, mousePos);
+
+		UPADrawer.DrawScriptableObject(window.position);
 		
 		UPADrawer.DrawLayerPanel ( window.position );
 		
