@@ -99,7 +99,44 @@ public class UPAImage : ScriptableObject {
 	}
 
 	// Color a certain pixel by position in window in a certain layer
-	public void SetPixelByPos (Color color, Vector2 pos, int layer) {
+	public void RemovePixelByPos(Color color,Vector2 pos,int layer)
+    {
+		Vector2 pixelCoordinate = GetPixelCoordinate(pos);
+
+		if (pixelCoordinate == new Vector2(-1, -1))
+			return;
+
+		Undo.RecordObject(layers[layer].tex, "ColorPixel");
+		layers[layer].SetPixel((int)pixelCoordinate.x, (int)pixelCoordinate.y, color);
+
+		if (layer > 0)
+        {
+            RemoveAssetFromLevel(layer,pixelCoordinate,levelassets.levelAssets);
+        }
+        else
+        {
+			RemoveAssetFromLevel(layer, pixelCoordinate, levelassets.floorTills);
+		}
+
+	}
+
+    private void RemoveAssetFromLevel( int layer, Vector2 pixelCoordinate,PixelToPrefeb[] levelassets)
+    {
+		
+			foreach (PixelToPrefeb assetColor in levelassets)
+			{
+				foreach(Vector2 n in assetColor.postions)
+            {
+                if (n == pixelCoordinate)
+                {
+					assetColor.postions.Remove(pixelCoordinate);
+                }
+            }
+		}
+		
+    }
+
+    public void SetPixelByPos (Color color, Vector2 pos, int layer) {
 		Vector2 pixelCoordinate = GetPixelCoordinate (pos);
 
 		if (pixelCoordinate == new Vector2 (-1, -1))
@@ -109,26 +146,16 @@ public class UPAImage : ScriptableObject {
 
 		layers[layer].SetPixel ((int)pixelCoordinate.x, (int)pixelCoordinate.y, color);
 
+        // remove levelasset
         //Store Data in SOLevelAssets
         if (layer > 0)
         {
-			foreach(PixelToPrefeb pixelcolor in levelassets.levelAssets)
-            {
-                if (pixelcolor.color.Equals(UPAEditorWindow.CurrentImg.selectedColor))
-                {
-					pixelcolor.add(pixelCoordinate);
-                }
-            }
+            EditLevelMap(pixelCoordinate,levelassets.levelAssets);
         }
         else
         {
-			foreach (PixelToPrefeb pixelcolor in levelassets.floorTills)
-			{
-				if (pixelcolor.color.Equals(UPAEditorWindow.CurrentImg.selectedColor))
-				{
-					pixelcolor.add(pixelCoordinate);
-				}
-			}
+			
+			EditLevelMap(pixelCoordinate,levelassets.floorTills);
 		}
 
 		
@@ -136,8 +163,25 @@ public class UPAImage : ScriptableObject {
 		dirty = true;
 	}
 
-	// Return a certain pixel by position in window
-	public Color GetPixelByPos (Vector2 pos, int layer) {
+	
+    private void EditLevelMap(Vector2 pixelCoordinate, PixelToPrefeb[] layer)
+    {
+        foreach (PixelToPrefeb pixelcolor in layer)
+        {
+            if (pixelcolor.postions.Contains(pixelCoordinate))
+            {
+                pixelcolor.postions.Remove(pixelCoordinate);
+            }
+            if (pixelcolor.color.Equals(UPAEditorWindow.CurrentImg.selectedColor))
+            {
+                pixelcolor.add(pixelCoordinate);
+				pixelcolor.postions = pixelcolor.postions.Distinct().ToList();
+			}
+        }
+    }
+
+    // Return a certain pixel by position in window
+    public Color GetPixelByPos (Vector2 pos, int layer) {
 		Vector2 pixelCoordinate = GetPixelCoordinate (pos);
 
 		if (pixelCoordinate == new Vector2 (-1, -1)) {

@@ -27,7 +27,7 @@ namespace LevelDesigner
     {
         public override void OnInspectorGUI()
         {
-            //base.OnInspectorGUI();
+            base.OnInspectorGUI();
 
             //Level Map Preview
             SOLevelAssets s = (SOLevelAssets)target;
@@ -38,8 +38,8 @@ namespace LevelDesigner
             {
                  s = (SOLevelAssets)target;
                 //LevelDesingEditorWindow.showWindow(s);
-                float w = s.LevelGrid.x * s.GridOffset * 3;
-                float h = s.LevelGrid.y * s.GridOffset * 3;
+                float w = s.LevelGrid.x;// * s.GridOffset * 3;
+                float h = s.LevelGrid.y;//* s.GridOffset * 3;
 
                 if (s.LevelMap != null)
                 {
@@ -79,20 +79,22 @@ namespace LevelDesigner
 
             //Draw the image
             _result.SetPixel(1, 1, Color.black);
-            GUI.DrawTexture(texPos, _result);
+            //GUI.DrawTexture(texPos, _result);
+            EditorGUI.DrawPreviewTexture(texPos,_result);
+            
 
             // Draw a grid above the image (y axis first)
-            for (int x = 0; x <= img.width; x += 1)
-            {
-                float posX = texPos.xMin + ((float)texPos.width / (float)img.width) * x - 0.2f;
-                EditorGUI.DrawRect(new Rect(posX, texPos.yMin, 1, texPos.height), UPADrawer.gridBGColor);
-            }
-            // Then x axis
-            for (int y = 0; y <= img.height; y += 1)
-            {
-                float posY = texPos.yMin + ((float)texPos.height / (float)img.height) * y - 0.2f;
-                EditorGUI.DrawRect(new Rect(texPos.xMin, posY, texPos.width, 1), UPADrawer.gridBGColor);
-            }
+            //for (int x = 0; x <= img.width; x += 1)
+            //{
+            //    float posX = texPos.xMin + ((float)texPos.width / (float)img.width) * x - 0.2f;
+            //    EditorGUI.DrawRect(new Rect(posX, texPos.yMin, 1, texPos.height), UPADrawer.gridBGColor);
+            //}
+            //// Then x axis
+            //for (int y = 0; y <= img.height; y += 1)
+            //{
+            //    float posY = texPos.yMin + ((float)texPos.height / (float)img.height) * y - 0.2f;
+            //    EditorGUI.DrawRect(new Rect(texPos.xMin, posY, texPos.width, 1), UPADrawer.gridBGColor);
+            //}
         }
 
         private Rect GetRect(UPAImage img)

@@ -119,9 +119,9 @@ public class UPADrawer : MonoBehaviour {
 
         for (int i = 0; i< colorPalatte.Length; i++)
 		{
-			UPAEditorWindow.CurrentImg.selectedColor = colorPalatte[0].color;
-			Rect position = new Rect(0, i * 50 + 10, 50, 50);
+			Rect position = new Rect(0, i * 50, 50, 50);
 			EditorGUI.DrawRect(position, colorPalatte[i].color);
+
 			if (GUI.Button(position, "", new GUIStyle()))
 			{
 				UPAEditorWindow.CurrentImg.selectedColor = colorPalatte[i].color;

@@ -13,11 +13,10 @@ namespace LevelDesigner
         //{
         //    public PixelToPrefeb[] assets;
         //}
-
         public PixelToPrefeb[] levelAssets;
         public PixelToPrefeb[] floorTills;
         public Vector2 LevelGrid;
-        public int GridOffset;
+        //public int GridOffset;
 
         public UPAImage LevelMap;
 

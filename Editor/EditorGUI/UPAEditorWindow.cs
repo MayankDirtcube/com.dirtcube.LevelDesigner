@@ -118,11 +118,14 @@ public class UPAEditorWindow : EditorWindow {
 			// Mouse buttons
 			if (e.isMouse && mousePos.y > 40 && e.type != EventType.MouseUp) {
 				if (!UPADrawer.GetLayerPanelRect (window.position).Contains (mousePos)) {
-					
+
 					if (tool == UPATool.Eraser)
-						CurrentImg.SetPixelByPos (Color.clear, mousePos, CurrentImg.selectedLayer);
+						CurrentImg.RemovePixelByPos(Color.clear, mousePos, CurrentImg.selectedLayer);
 					else if (tool == UPATool.PaintBrush)
-						CurrentImg.SetPixelByPos (selectedColor, mousePos, CurrentImg.selectedLayer);
+					{
+						CurrentImg.SetPixelByPos(selectedColor, mousePos, CurrentImg.selectedLayer);
+						
+					}
 					else if (tool == UPATool.BoxBrush)
 						Debug.Log ("TODO: Add Box Brush tool.");
 					else if (tool == UPATool.ColorPicker){
@@ -201,6 +204,9 @@ public class UPAEditorWindow : EditorWindow {
 		
 		UPADrawer.DrawLayerPanel ( window.position );
 		
-		e.Use();	// Release event handler
+		e.Use();    // Release event handler
+
+
+		EditorGUIUtility.AddCursorRect(new Rect(0, 0, 20, 20), MouseCursor.CustomCursor);
 	}
 }
